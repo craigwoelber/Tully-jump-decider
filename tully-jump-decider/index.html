@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Is today a good day to skydive at Tullahoma Regional Airport (KTHA), Tennessee?" />
+  <meta name="theme-color" content="#0a0e1a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Jump?" />
+
+  <title>Tully Jump Decider</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <header class="site-header">
+      <h1>Tully <span>Jump</span> Decider</h1>
+      <p class="site-subtitle">Tullahoma Regional Airport &middot; KTHA</p>
+    </header>
+
+    <!-- Error banner -->
+    <div class="error-banner" id="errorBanner" role="alert" aria-live="polite"></div>
+
+    <!-- Verdict -->
+    <div class="verdict-banner loading" id="verdictBanner" aria-live="polite">
+      <p class="verdict-label">Today's Verdict</p>
+      <div class="verdict-text" id="verdictText">Loading&hellip;</div>
+      <p class="verdict-sub" id="verdictSub">Fetching weather data</p>
+    </div>
+
+    <!-- Meta row: timestamp + refresh -->
+    <div class="meta-row">
+      <span id="updatedAt">Last updated: &mdash;</span>
+      <button class="refresh-btn" id="refreshBtn" aria-label="Refresh weather data">
+        <span class="refresh-icon" aria-hidden="true">&#8635;</span>
+        Refresh
+      </button>
+    </div>
+
+    <!-- Surface conditions -->
+    <h2 class="section-heading">Surface Conditions &mdash; KTHA Airport</h2>
+    <div class="cards-grid" id="surfaceCards">
+      <!-- Surface Wind -->
+      <div class="factor-card unavailable" id="card-surfaceWind">
+        <span class="status-dot unavailable" id="dot-surfaceWind"></span>
+        <div class="card-value" id="val-surfaceWind">&mdash;</div>
+        <div class="card-dir" id="dir-surfaceWind"></div>
+        <div class="card-label">Surface Wind</div>
+      </div>
+
+      <!-- Sky Cover -->
+      <div class="factor-card unavailable" id="card-skyCover">
+        <span class="status-dot unavailable" id="dot-skyCover"></span>
+        <div class="card-value" id="val-skyCover">&mdash;</div>
+        <div class="card-dir" id="dir-skyCover"></div>
+        <div class="card-label">Sky Cover</div>
+      </div>
+
+      <!-- Precipitation -->
+      <div class="factor-card unavailable" id="card-precip">
+        <span class="status-dot unavailable" id="dot-precip"></span>
+        <div class="card-value" id="val-precip">&mdash;</div>
+        <div class="card-label">Precip Chance</div>
+      </div>
+
+      <!-- Temperature -->
+      <div class="factor-card unavailable" id="card-temp">
+        <span class="status-dot unavailable" id="dot-temp"></span>
+        <div class="card-value" id="val-temp">&mdash;</div>
+        <div class="card-label">Surface Temp</div>
+      </div>
+    </div>
+
+    <!-- Winds Aloft -->
+    <h2 class="section-heading">Winds Aloft &mdash; BNA (Nashville)</h2>
+    <div class="cards-grid" id="aloftCards">
+      <!-- 3,000 ft -->
+      <div class="factor-card unavailable" id="card-aloft3k">
+        <span class="status-dot unavailable" id="dot-aloft3k"></span>
+        <div class="card-value" id="val-aloft3k">&mdash;</div>
+        <div class="card-dir" id="dir-aloft3k"></div>
+        <div class="card-label">3,000 ft</div>
+      </div>
+
+      <!-- 6,000 ft -->
+      <div class="factor-card unavailable" id="card-aloft6k">
+        <span class="status-dot unavailable" id="dot-aloft6k"></span>
+        <div class="card-value" id="val-aloft6k">&mdash;</div>
+        <div class="card-dir" id="dir-aloft6k"></div>
+        <div class="card-label">6,000 ft</div>
+      </div>
+
+      <!-- 9,000 ft -->
+      <div class="factor-card unavailable" id="card-aloft9k">
+        <span class="status-dot unavailable" id="dot-aloft9k"></span>
+        <div class="card-value" id="val-aloft9k">&mdash;</div>
+        <div class="card-dir" id="dir-aloft9k"></div>
+        <div class="card-label">9,000 ft</div>
+      </div>
+
+      <!-- 12,000 ft -->
+      <div class="factor-card unavailable" id="card-aloft12k">
+        <span class="status-dot unavailable" id="dot-aloft12k"></span>
+        <div class="card-value" id="val-aloft12k">&mdash;</div>
+        <div class="card-dir" id="dir-aloft12k"></div>
+        <div class="card-label">12,000 ft</div>
+      </div>
+    </div>
+
+    <!-- YouTube live cam -->
+    <section class="youtube-section">
+      <h2 class="section-heading">What&rsquo;s it look like right now?</h2>
+      <div id="youtubeContainer"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Data: <a href="https://www.weather.gov" target="_blank" rel="noopener" style="color:var(--accent)">NWS</a>
+         &amp; <a href="https://aviationweather.gov" target="_blank" rel="noopener" style="color:var(--accent)">AWC</a>
+         &mdash; Auto-refreshes every 30 min</p>
+      <p style="margin-top:0.25rem">Thresholds are guidelines only &mdash; always defer to your DZ&rsquo;s S&amp;TA</p>
+    </footer>
+
+  </div><!-- /.app-wrapper -->
+
+  <script src="app.js"></script>
+  <script>
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').catch(err => {
+          console.warn('Service worker registration failed:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Dark background -->
+  <rect width="512" height="512" fill="#0a0e1a" rx="64"/>
+
+  <!-- Parachute canopy -->
+  <path d="M256 80
+    C 156 80, 96 150, 96 230
+    Q 96 240, 106 240
+    L 406 240
+    Q 416 240, 416 230
+    C 416 150, 356 80, 256 80 Z"
+    fill="white" opacity="0.95"/>
+
+  <!-- Canopy panels (vertical lines dividing it) -->
+  <line x1="176" y1="82" x2="196" y2="240" stroke="#0a0e1a" stroke-width="3" opacity="0.4"/>
+  <line x1="216" y1="80" x2="226" y2="240" stroke="#0a0e1a" stroke-width="3" opacity="0.4"/>
+  <line x1="256" y1="80" x2="256" y2="240" stroke="#0a0e1a" stroke-width="3" opacity="0.4"/>
+  <line x1="296" y1="80" x2="286" y2="240" stroke="#0a0e1a" stroke-width="3" opacity="0.4"/>
+  <line x1="336" y1="82" x2="316" y2="240" stroke="#0a0e1a" stroke-width="3" opacity="0.4"/>
+
+  <!-- Suspension lines left side -->
+  <line x1="196" y1="240" x2="236" y2="360" stroke="white" stroke-width="2.5" opacity="0.8"/>
+  <line x1="226" y1="240" x2="244" y2="360" stroke="white" stroke-width="2.5" opacity="0.8"/>
+  <line x1="146" y1="240" x2="228" y2="360" stroke="white" stroke-width="2.5" opacity="0.8"/>
+
+  <!-- Suspension lines right side -->
+  <line x1="316" y1="240" x2="268" y2="360" stroke="white" stroke-width="2.5" opacity="0.8"/>
+  <line x1="286" y1="240" x2="260" y2="360" stroke="white" stroke-width="2.5" opacity="0.8"/>
+  <line x1="366" y1="240" x2="284" y2="360" stroke="white" stroke-width="2.5" opacity="0.8"/>
+
+  <!-- Skydiver body (simple figure) -->
+  <!-- Head -->
+  <circle cx="256" cy="370" r="14" fill="white" opacity="0.9"/>
+  <!-- Torso -->
+  <rect x="244" y="384" width="24" height="36" rx="6" fill="white" opacity="0.9"/>
+  <!-- Arms spread -->
+  <line x1="244" y1="396" x2="212" y2="408" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+  <line x1="268" y1="396" x2="300" y2="408" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+  <!-- Legs -->
+  <line x1="250" y1="420" x2="238" y2="450" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+  <line x1="262" y1="420" x2="274" y2="450" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+</svg>

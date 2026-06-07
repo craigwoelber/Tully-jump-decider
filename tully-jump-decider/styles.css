@@ -1,0 +1,385 @@
+/* ===================================================
+   Tully Jump Decider — styles.css
+   Dark aviation theme, mobile-first, no external deps
+   =================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:        #0a0e1a;
+  --bg-card:   #111827;
+  --bg-card2:  #1a2235;
+  --border:    #1e2d45;
+  --accent:    #1e90ff;
+  --accent-dim:#1565c0;
+  --text:      #e2e8f0;
+  --text-muted:#8899aa;
+  --green:     #22c55e;
+  --yellow:    #f59e0b;
+  --red:       #ef4444;
+  --green-bg:  rgba(34, 197, 94, 0.12);
+  --yellow-bg: rgba(245, 158, 11, 0.12);
+  --red-bg:    rgba(239, 68, 68, 0.12);
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               Oxygen, Ubuntu, Cantarell, sans-serif;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ---- Layout ---- */
+
+.app-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+/* ---- Header ---- */
+
+.site-header {
+  padding: 1.5rem 0 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.site-header h1 {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.site-header h1 span {
+  color: var(--accent);
+}
+
+.site-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+
+/* ---- Error banner ---- */
+
+.error-banner {
+  background: var(--red-bg);
+  border: 1px solid var(--red);
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  color: var(--red);
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  display: none;
+}
+
+.error-banner.visible {
+  display: block;
+}
+
+/* ---- Verdict banner ---- */
+
+.verdict-banner {
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border: 2px solid transparent;
+  transition: background 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.verdict-banner.go {
+  background: var(--green-bg);
+  border-color: var(--green);
+}
+
+.verdict-banner.caution {
+  background: var(--yellow-bg);
+  border-color: var(--yellow);
+}
+
+.verdict-banner.nogo {
+  background: var(--red-bg);
+  border-color: var(--red);
+}
+
+.verdict-banner.loading {
+  background: rgba(30, 144, 255, 0.08);
+  border-color: var(--accent);
+}
+
+.verdict-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.verdict-text {
+  font-size: clamp(2.8rem, 10vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.verdict-banner.go    .verdict-text { color: var(--green); }
+.verdict-banner.caution .verdict-text { color: var(--yellow); }
+.verdict-banner.nogo  .verdict-text { color: var(--red); }
+.verdict-banner.loading .verdict-text { color: var(--accent); font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 600; }
+
+.verdict-sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+}
+
+/* ---- Updated timestamp + refresh ---- */
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.refresh-btn {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--accent);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: inherit;
+}
+
+.refresh-btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.refresh-icon {
+  display: inline-block;
+  transition: transform 0.6s ease;
+}
+
+.refresh-btn.spinning .refresh-icon {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ---- Section headings ---- */
+
+.section-heading {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---- Factor cards grid ---- */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.factor-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 0.9rem 0.85rem;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.factor-card.good {
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+.factor-card.caution {
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.factor-card.nogo {
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.factor-card.unavailable {
+  opacity: 0.55;
+}
+
+/* Status dot */
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  flex-shrink: 0;
+}
+
+.status-dot.good       { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.status-dot.caution    { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
+.status-dot.nogo       { background: var(--red); box-shadow: 0 0 6px var(--red); }
+.status-dot.unavailable { background: var(--text-muted); box-shadow: none; }
+
+.card-value {
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+
+.card-unit {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.card-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.1rem;
+}
+
+.card-dir {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* ---- Winds aloft sub-section ---- */
+
+.aloft-heading {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 1.2rem 0 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ---- YouTube section ---- */
+
+.youtube-section {
+  margin-bottom: 1.75rem;
+}
+
+.youtube-embed-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.youtube-embed-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+.youtube-placeholder {
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.youtube-placeholder code {
+  background: var(--bg-card2);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
+  font-size: 0.8em;
+  color: var(--accent);
+}
+
+/* ---- Footer ---- */
+
+.site-footer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  line-height: 1.8;
+}
+
+/* ---- Responsive ---- */
+
+@media (min-width: 480px) {
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  }
+}
+
+@media (min-width: 700px) {
+  .app-wrapper {
+    padding: 0 2rem 3rem;
+  }
+
+  .site-header {
+    padding: 2rem 0 1.25rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 1rem;
+  }
+}
