@@ -232,15 +232,15 @@ function setVerdict(verdict, sub) {
 
   if (verdict === 'go') {
     verdictBanner.classList.add('go');
-    verdictText.textContent = 'GO';
+    verdictText.textContent = 'Send it!';
     verdictSub.textContent = sub;
   } else if (verdict === 'caution') {
     verdictBanner.classList.add('caution');
-    verdictText.textContent = 'CAUTION';
+    verdictText.textContent = 'Sketchy...';
     verdictSub.textContent = sub;
   } else if (verdict === 'nogo') {
     verdictBanner.classList.add('nogo');
-    verdictText.textContent = 'NO-GO';
+    verdictText.textContent = 'Not Today';
     verdictSub.textContent = sub;
   } else {
     verdictBanner.classList.add('loading');
